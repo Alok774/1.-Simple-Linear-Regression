@@ -1,1 +1,1 @@
-# 1.-Simple-Linear-Regression
+# 1.Data Science Project
