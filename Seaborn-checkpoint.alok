@@ -1,0 +1,1061 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "becc97ef",
+   "metadata": {},
+   "source": [
+    "# SEABORN\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f3fa4f78",
+   "metadata": {},
+   "source": [
+    "Seaborn is a library mostly used for statistical plotting in Python.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "76ac433c",
+   "metadata": {},
+   "source": [
+    "By using the seaborn library, we can easily represent our data on a plot. \n",
+    "This library is used to visualize our data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "342192b4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "import seaborn as sns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "f856692a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>total_bill</th>\n",
+       "      <th>tip</th>\n",
+       "      <th>sex</th>\n",
+       "      <th>smoker</th>\n",
+       "      <th>day</th>\n",
+       "      <th>time</th>\n",
+       "      <th>size</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>16.99</td>\n",
+       "      <td>1.01</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sun</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>10.34</td>\n",
+       "      <td>1.66</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sun</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>21.01</td>\n",
+       "      <td>3.50</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sun</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>23.68</td>\n",
+       "      <td>3.31</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sun</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>24.59</td>\n",
+       "      <td>3.61</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sun</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>4</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>239</th>\n",
+       "      <td>29.03</td>\n",
+       "      <td>5.92</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>240</th>\n",
+       "      <td>27.18</td>\n",
+       "      <td>2.00</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>Yes</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>241</th>\n",
+       "      <td>22.67</td>\n",
+       "      <td>2.00</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Yes</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>242</th>\n",
+       "      <td>17.82</td>\n",
+       "      <td>1.75</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>243</th>\n",
+       "      <td>18.78</td>\n",
+       "      <td>3.00</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Thur</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>244 rows × 7 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     total_bill   tip     sex smoker   day    time  size\n",
+       "0         16.99  1.01  Female     No   Sun  Dinner     2\n",
+       "1         10.34  1.66    Male     No   Sun  Dinner     3\n",
+       "2         21.01  3.50    Male     No   Sun  Dinner     3\n",
+       "3         23.68  3.31    Male     No   Sun  Dinner     2\n",
+       "4         24.59  3.61  Female     No   Sun  Dinner     4\n",
+       "..          ...   ...     ...    ...   ...     ...   ...\n",
+       "239       29.03  5.92    Male     No   Sat  Dinner     3\n",
+       "240       27.18  2.00  Female    Yes   Sat  Dinner     2\n",
+       "241       22.67  2.00    Male    Yes   Sat  Dinner     2\n",
+       "242       17.82  1.75    Male     No   Sat  Dinner     2\n",
+       "243       18.78  3.00  Female     No  Thur  Dinner     2\n",
+       "\n",
+       "[244 rows x 7 columns]"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df=pd.read_csv(\"C:\\\\Users\\\\Alok\\OneDrive\\Desktop\\Full Stack Data Science\\Shiva Rama krishna\\Python For Data science\\\\tips.csv\")\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "3918f8c8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "continous=['total_bill','tip']\n",
+    "descrete=['sex','smoker','day','time','size']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "aeeac2f0",
+   "metadata": {},
+   "source": [
+    "Exploratory Data Analysis (EDA) :\n",
+    "It is used by data scientists to analyze and investigate data sets and summarize their main characteristics."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "a3dcc004",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>total_bill</th>\n",
+       "      <th>tip</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>244.000000</td>\n",
+       "      <td>244.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>19.785943</td>\n",
+       "      <td>2.998279</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>8.902412</td>\n",
+       "      <td>1.383638</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>3.070000</td>\n",
+       "      <td>1.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>13.347500</td>\n",
+       "      <td>2.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>17.795000</td>\n",
+       "      <td>2.900000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>24.127500</td>\n",
+       "      <td>3.562500</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>50.810000</td>\n",
+       "      <td>10.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       total_bill         tip\n",
+       "count  244.000000  244.000000\n",
+       "mean    19.785943    2.998279\n",
+       "std      8.902412    1.383638\n",
+       "min      3.070000    1.000000\n",
+       "25%     13.347500    2.000000\n",
+       "50%     17.795000    2.900000\n",
+       "75%     24.127500    3.562500\n",
+       "max     50.810000   10.000000"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# for continous variables\n",
+    "df[continous].describe() # Or df[['totalbil','tip']].describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "1bb41d9d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>size</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>244.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>2.569672</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>0.951100</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>1.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>2.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>2.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>3.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>6.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "             size\n",
+       "count  244.000000\n",
+       "mean     2.569672\n",
+       "std      0.951100\n",
+       "min      1.000000\n",
+       "25%      2.000000\n",
+       "50%      2.000000\n",
+       "75%      3.000000\n",
+       "max      6.000000"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# for discrete variables\n",
+    "df[descrete].describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "dadc0f31",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>sex</th>\n",
+       "      <th>smoker</th>\n",
+       "      <th>day</th>\n",
+       "      <th>time</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>unique</th>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>4</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>top</th>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>freq</th>\n",
+       "      <td>157</td>\n",
+       "      <td>151</td>\n",
+       "      <td>87</td>\n",
+       "      <td>176</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "         sex smoker  day    time\n",
+       "count    244    244  244     244\n",
+       "unique     2      2    4       2\n",
+       "top     Male     No  Sat  Dinner\n",
+       "freq     157    151   87     176"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe(include='object') #what is object & why use"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "7e86184d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>total_bill</th>\n",
+       "      <th>tip</th>\n",
+       "      <th>sex</th>\n",
+       "      <th>smoker</th>\n",
+       "      <th>day</th>\n",
+       "      <th>time</th>\n",
+       "      <th>size</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>244.000000</td>\n",
+       "      <td>244.000000</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244</td>\n",
+       "      <td>244.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>unique</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2</td>\n",
+       "      <td>2</td>\n",
+       "      <td>4</td>\n",
+       "      <td>2</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>top</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>freq</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>157</td>\n",
+       "      <td>151</td>\n",
+       "      <td>87</td>\n",
+       "      <td>176</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>19.785943</td>\n",
+       "      <td>2.998279</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2.569672</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>8.902412</td>\n",
+       "      <td>1.383638</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.951100</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>3.070000</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>1.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>13.347500</td>\n",
+       "      <td>2.000000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>17.795000</td>\n",
+       "      <td>2.900000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>2.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>24.127500</td>\n",
+       "      <td>3.562500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>50.810000</td>\n",
+       "      <td>10.000000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>6.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        total_bill         tip   sex smoker  day    time        size\n",
+       "count   244.000000  244.000000   244    244  244     244  244.000000\n",
+       "unique         NaN         NaN     2      2    4       2         NaN\n",
+       "top            NaN         NaN  Male     No  Sat  Dinner         NaN\n",
+       "freq           NaN         NaN   157    151   87     176         NaN\n",
+       "mean     19.785943    2.998279   NaN    NaN  NaN     NaN    2.569672\n",
+       "std       8.902412    1.383638   NaN    NaN  NaN     NaN    0.951100\n",
+       "min       3.070000    1.000000   NaN    NaN  NaN     NaN    1.000000\n",
+       "25%      13.347500    2.000000   NaN    NaN  NaN     NaN    2.000000\n",
+       "50%      17.795000    2.900000   NaN    NaN  NaN     NaN    2.000000\n",
+       "75%      24.127500    3.562500   NaN    NaN  NaN     NaN    3.000000\n",
+       "max      50.810000   10.000000   NaN    NaN  NaN     NaN    6.000000"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe(include='all') #why use all"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "3e35eb7a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Male      157\n",
+       "Female     87\n",
+       "Name: sex, dtype: int64"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['sex'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "dc82d08f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "No     151\n",
+       "Yes     93\n",
+       "Name: smoker, dtype: int64"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['smoker'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "a65d05c0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Sat     87\n",
+       "Sun     76\n",
+       "Thur    62\n",
+       "Fri     19\n",
+       "Name: day, dtype: int64"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['day'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "e0e2381b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Dinner    176\n",
+       "Lunch      68\n",
+       "Name: time, dtype: int64"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['time'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "10ac65a7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "2    156\n",
+       "3     38\n",
+       "4     37\n",
+       "5      5\n",
+       "1      4\n",
+       "6      4\n",
+       "Name: size, dtype: int64"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['size'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "be48b2c4",
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "total_bill    0\n",
+       "tip           0\n",
+       "sex           0\n",
+       "smoker        0\n",
+       "day           0\n",
+       "time          0\n",
+       "size          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "09c7d190",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3f9fec52",
+   "metadata": {},
+   "source": [
+    "# Plot's for Continous Data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6e2a1ced",
+   "metadata": {},
+   "source": [
+    " 1. Univariate (Single Variable)\n",
+    "  \n",
+    "  - Histogram :-\n",
+    "   \n",
+    "*It is a diagram consisting of rectangles whose area is proportional to the frequency of a variable and whose width is equal to the class interval.\n",
+    "*It is also called continous frequency distribution.\n",
+    "* Applicable : Only for continous variable\n",
+    "* Use : To check weather data is skewed or normal.\n",
+    "        To check how the data is distributed.\n",
+    "*It is univariate analysis.   "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "afc85808",
+   "metadata": {},
+   "source": [
+    "Example:-"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f44d1322",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8f82c232",
+   "metadata": {},
+   "source": [
+    "# - Boxplot:-\n",
+    "* A simple way of representing statistical data on a plot in which a rectangle is drawn to represent the second and third quartiles, usually with a vertical line inside to indicate the median value. The lower and upper quartiles are shown as horizontal lines either side of the rectangle.\n",
+    "* It is also called The five-number summary is the minimum, first quartile, median, third quartile, and maximum\n",
+    "* Applicable: Only continous variable\n",
+    "* Use : To check Outlier are available or not\n",
+    "        Outlier :{ A value that \"lies outside\" (is much smaller or larger than) most of the other values in a set of data. For example in the scores 25,29,3,32,85,33,27,28 both 3 and 85 are \"outliers\".}\n",
+    "        \n",
+    "         \n",
+    "        \n",
+    "        \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e8cc8349",
+   "metadata": {},
+   "source": [
+    "# 2. Bivariate (plot between two Variable)\n",
+    "\n",
+    "   - SCATTER PLOT :-\n",
+    "* It represents data points on a two-dimensional plane or on a Cartesian system. The independent variable or attribute is plotted on the X-axis, while the dependent variable is plotted on the Y-axis. These plots are often called scatter graphs or scatter diagrams.\n",
+    "* By considering two continous variables\n",
+    "* Use : i.Direction(+ve,-ve,no direction)\n",
+    "       ii.Strength\n",
+    "      iii.Linear\n",
+    "* Example:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2e0321de",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9af05d43",
+   "metadata": {},
+   "source": [
+    "   - Line plot :-\n",
+    "* A Line plot can be defined as a graph that displays data as points or check marks above a number line, showing the frequency of each value\n",
+    "* Use: Represent time series (as time changes how the value changes)\n",
+    "\n",
+    "* Example:-\n",
+    " "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8c3fa8fc",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "12414505",
+   "metadata": {},
+   "source": [
+    "  - Joint plot :-\n",
+    "* A Jointplot comprises three plots. Out of the three, one plot displays a bivariate graph which shows how the dependent variable(Y) varies with the independent variable(X). Another plot is placed horizontally at the top of the bivariate graph and it shows the distribution of the independent variable(X).\n",
+    "* Use : to quickly visualize and analyze the relationship between two variables and describe their individual distributions on the same plot.\n",
+    "* Example:-"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "062caef6",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b0da23ff",
+   "metadata": {},
+   "source": [
+    " - Violin plot :-\n",
+    "* A violin plot is a statistical representation of numerical data. It is similar to a box plot.\n",
+    "*Example :-"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d917d2d5",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2099096a",
+   "metadata": {},
+   "source": [
+    "# 3. Multivariate (More than 2 Variables)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf047d33",
+   "metadata": {},
+   "source": [
+    "  - Pair plot :-( Histogram + Scatter plo/\n",
+    "*The Seaborn Pairplot allows us to plot pairwise relationships between variables within a dataset. This creates a nice visualisation and helps us understand the data by summarising a large amount of data in a single figure.\n",
+    "* Applicable : Only for continous variable\n",
+    "* Use : Instead of single histogram & multiple scatter plots,we will select pair plot\n",
+    "* Example:   "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d2c10920",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7a255c76",
+   "metadata": {},
+   "source": [
+    " - Heatmap :-\n",
+    "*A heat map is a two-dimensional representation of data in which values are represented by colors. \n",
+    "* Example :"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a606fb9b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8578d7aa",
+   "metadata": {},
+   "source": [
+    "# "
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
